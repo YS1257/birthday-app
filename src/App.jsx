@@ -67,7 +67,7 @@ function App() {
 
           <input
             placeholder="email"
-            type="text"
+            type="email"
             name="email"
             value={inputs.email || ""}
             onChange={handleChange}
