@@ -12,15 +12,18 @@ function App() {
   const [inputs, setInputs] = useState({});
   const [birthday, setBirthday] = useState();
   const [greeting, setGreeting] = useState(null);
+  const [sent, setSent] = useState(true)
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    setSent(false)
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setSent(true)
     const res = await axios.post("http://localhost:8080/", {
       ...inputs,
       birthday,
@@ -74,7 +77,10 @@ function App() {
               label="birthday"
               name="birthday"
               value={birthday}
-              onChange={(birthday) => setBirthday(birthday)}
+              onChange={(birthday) => {
+                setSent(false)
+                setBirthday(birthday)}
+              }
               format="DD.MM"
               views={["month", "day"]}
             />
@@ -83,7 +89,7 @@ function App() {
         <br />
         <input type="submit" />
       </form>
-      {greeting && (
+      {greeting && sent && (
         <Stack>
           <Typography>{`Welcome ${inputs.firstName}, there are ${greeting} days until your birthday.`}</Typography>
           <Typography>{`We will be sending a gift coupon to the email ${inputs.email}`}</Typography>
