@@ -12,18 +12,18 @@ function App() {
   const [inputs, setInputs] = useState({});
   const [birthday, setBirthday] = useState();
   const [greeting, setGreeting] = useState(null);
-  const [sent, setSent] = useState(true)
+  const [sent, setSent] = useState(true);
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setSent(false)
+    setSent(false);
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setSent(true)
+    setSent(true);
     const res = await axios.post("http://localhost:8080/", {
       ...inputs,
       birthday,
@@ -57,8 +57,9 @@ function App() {
           />
 
           <input
-            placeholder="phone"
             type="text"
+            pattern="[0-9]*"
+            placeholder="phone"
             name="phone"
             value={inputs.phone || ""}
             onChange={handleChange}
@@ -78,9 +79,9 @@ function App() {
               name="birthday"
               value={birthday}
               onChange={(birthday) => {
-                setSent(false)
-                setBirthday(birthday)}
-              }
+                setSent(false);
+                setBirthday(birthday);
+              }}
               format="DD.MM"
               views={["month", "day"]}
             />
