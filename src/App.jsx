@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <Stack spacing={5}>
+    <Stack spacing={5} width={700} height={500}>
       <form onSubmit={handleSubmit}>
         <Stack spacing={2}>
           <input
@@ -90,12 +90,12 @@ function App() {
         <br />
         <input type="submit" />
       </form>
-      {greeting && sent && (
-        <Stack>
+      {(greeting && sent) ? (
+        <Stack height={100}>
           <Typography>{`Welcome ${inputs.firstName}, there are ${greeting} days until your birthday.`}</Typography>
           <Typography>{`We will be sending a gift coupon to the email ${inputs.email}`}</Typography>
         </Stack>
-      )}
+      ): <Typography height={100}/>}
     </Stack>
   );
 }
